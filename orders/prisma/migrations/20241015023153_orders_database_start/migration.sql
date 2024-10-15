@@ -1,0 +1,14 @@
+-- CreateTable
+CREATE TABLE "Order" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "orderDate" DATETIME NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "OrderItem" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "orderId" INTEGER NOT NULL,
+    "quantity" INTEGER NOT NULL,
+    "price" REAL NOT NULL,
+    CONSTRAINT "OrderItem_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
