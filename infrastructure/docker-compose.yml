@@ -47,7 +47,7 @@ services:
       - ./APIS/products:/mem/productsAPI
     networks:
       - dev_network
-      
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: dev_pgadmin
@@ -60,7 +60,7 @@ services:
       - dev_network
 
   db_dev:
-    image: postgres:latest
+    image: postgres
     deploy:
       resources:
         limits:

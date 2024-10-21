@@ -1,61 +1,54 @@
 FROM node:20
 
+# Cambia a usuario root para poder instalar dependencias
 USER root
 
-RUN apt-get update && apt-get install -y \
-    wget \
-    nano
+# Instala herramientas necesarias
+RUN apt-get update && apt-get install -y wget nano
 
 # Limpia la caché de npm
 RUN npm cache clean --force
 
-# Actualiza npm a una versión específica
+# Instala una versión específica de npm
 RUN npm install -g npm@8.12.1
 
-# Instala las dependencias globales necesarias
-RUN npm install -g prisma \
-    && npm install -g cors \
-    && npm install -g dotenv \
-    && npm install -g express \
-    && npm install -g jsonwebtoken \
-    && npm install -g nodemon -D\
-    && npm install -g @prisma/client\
-    && npm install -g crypto-js\
-    && npm install -g cryptojs\
-    && npm install -g sqlite
+# Crea los directorios para cada microservicio
+RUN mkdir -p /usr/usersAPI \
+    /ord/ordersAPI \
+    /mem/membershipsAPI \
+    /pro/productsAPI
 
-
-# Crea el directorio de la aplicación
-RUN mkdir -p /usr/usersAPI
-RUN mkdir -p /ord/ordersAPI
-RUN mkdir -p /mem/membershipsAPI
-RUN mkdir -p /pro/productsAPI
-
-
-# Establece el directorio de trabajo
+# Instala dependencias para usersAPI
 WORKDIR /usr/usersAPI
-WORKDIR /ord/ordersAPI
-WORKDIR /mem/membershipsAPI
-WORKDIR /pro/productsAPI
-
-# Copia el archivo package.json y package-lock.json
 COPY users/package*.json ./
-COPY orders/package*.json /ord/ordersAPI/
-COPY memberships/package*.json /mem/membershipsAPI/
-COPY products/package*.json /pro/productsAPI/
+RUN npm run install-all
+RUN npm run install-dev
+COPY users/ ./
 
-# Instala las dependencias del proyecto
-RUN npm install
-RUN npm install dotenv --save--dev
+# Instala dependencias para ordersAPI
+WORKDIR /ord/ordersAPI
+COPY orders/package*.json ./
+RUN npm run install-all
+RUN npm run install-dev
+COPY orders/ ./
 
-# Copia el resto de la aplicación
-COPY users ./
-COPY orders /ord/ordersAPI/
-COPY memberships /mem/membershipsAPI/
-COPY products /pro/productsAPI/
+# Instala dependencias para membershipsAPI
+WORKDIR /mem/membershipsAPI
+COPY memberships/package*.json ./
+RUN npm run install-all
+RUN npm run install-dev
+COPY memberships/ ./
 
-# Genera los archivos de Prisma
+# Instala dependencias para productsAPI
+WORKDIR /pro/productsAPI
+COPY products/package*.json ./
+RUN npm run install-all
+RUN npm run install-dev
+COPY products/ ./
+
+# Genera los archivos de Prisma en cada servicio
+WORKDIR /usr/usersAPI
 RUN npx prisma generate
 
-# Cambia el comando para usar nodemon
+# Cambia el comando para usar nodemon en el servicio de usuarios (puedes cambiarlo a otro)
 CMD ["npx", "nodemon", "app.js"]
