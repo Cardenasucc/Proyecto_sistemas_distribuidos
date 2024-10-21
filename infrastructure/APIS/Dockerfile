@@ -27,18 +27,32 @@ RUN npm install -g prisma \
 
 # Crea el directorio de la aplicación
 RUN mkdir -p /usr/usersAPI
+RUN mkdir -p /ord/ordersAPI
+RUN mkdir -p /mem/membershipsAPI
+RUN mkdir -p /pro/productsAPI
+
 
 # Establece el directorio de trabajo
 WORKDIR /usr/usersAPI
+WORKDIR /ord/ordersAPI
+WORKDIR /mem/membershipsAPI
+WORKDIR /pro/productsAPI
 
 # Copia el archivo package.json y package-lock.json
 COPY users/package*.json ./
+COPY orders/package*.json /ord/ordersAPI/
+COPY memberships/package*.json /mem/membershipsAPI/
+COPY products/package*.json /pro/productsAPI/
 
 # Instala las dependencias del proyecto
 RUN npm install
+RUN npm install dotenv --save--dev
 
 # Copia el resto de la aplicación
 COPY users ./
+COPY orders /ord/ordersAPI/
+COPY memberships /mem/membershipsAPI/
+COPY products /pro/productsAPI/
 
 # Genera los archivos de Prisma
 RUN npx prisma generate
