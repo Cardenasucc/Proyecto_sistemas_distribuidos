@@ -1,5 +1,6 @@
+version: '3.8'
+
 services:
-  # Servicio para la API de usuarios
   users_api:
     build:
       context: ./APIS
@@ -19,15 +20,14 @@ services:
     networks:
       - dev_network
     environment:
-      DATABASE_URL: postgres://postgres:12345@users_db:5432/users_db  # URL de conexión para la base de datos de users
+      DATABASE_URL: postgres://postgres:12345@users_db:5432/users_db 
 
-  # Servicio para la base de datos de usuarios
   users_db:
     image: postgres
     container_name: users_db
     environment:
       POSTGRES_PASSWORD: 12345
-      POSTGRES_DB: users_db  # Nombre de la base de datos para users
+      POSTGRES_DB: users_db
     ports:
       - "5432:5432"
     volumes:
@@ -35,7 +35,6 @@ services:
     networks:
       - dev_network
 
-  # Servicio para la API de órdenes
   orders_api:
     build:
       context: ./APIS
@@ -46,15 +45,14 @@ services:
     networks:
       - dev_network
     environment:
-      DATABASE_URL: postgres://postgres:12345@orders_db:5432/orders_db  # URL de conexión para la base de datos de órdenes
+      DATABASE_URL: postgres://postgres:12345@orders_db:5432/orders_db 
 
-  # Servicio para la base de datos de órdenes
   orders_db:
     image: postgres
     container_name: orders_db
     environment:
       POSTGRES_PASSWORD: 12345
-      POSTGRES_DB: orders_db  # Nombre de la base de datos para órdenes
+      POSTGRES_DB: orders_db
     ports:
       - "5433:5432"
     volumes:
@@ -62,7 +60,6 @@ services:
     networks:
       - dev_network
 
-  # Servicio para la API de membresías
   memberships_api:
     build:
       context: ./APIS
@@ -73,15 +70,14 @@ services:
     networks:
       - dev_network
     environment:
-      DATABASE_URL: postgres://postgres:12345@memberships_db:5432/memberships_db  # URL de conexión para la base de datos de membresías
+      DATABASE_URL: postgres://postgres:12345@memberships_db:5432/memberships_db 
 
-  # Servicio para la base de datos de membresías
   memberships_db:
     image: postgres
     container_name: memberships_db
     environment:
       POSTGRES_PASSWORD: 12345
-      POSTGRES_DB: memberships_db  # Nombre de la base de datos para membresías
+      POSTGRES_DB: memberships_db
     ports:
       - "5434:5432"
     volumes:
@@ -89,7 +85,6 @@ services:
     networks:
       - dev_network
 
-  # Servicio para la API de productos
   products_api:
     build:
       context: ./APIS
@@ -100,15 +95,14 @@ services:
     networks:
       - dev_network
     environment:
-      DATABASE_URL: postgres://postgres:12345@products_db:5432/products_db  # URL de conexión para la base de datos de productos
+      DATABASE_URL: postgres://postgres:12345@products_db:5432/products_db 
 
-  # Servicio para la base de datos de productos
   products_db:
     image: postgres
     container_name: products_db
     environment:
       POSTGRES_PASSWORD: 12345
-      POSTGRES_DB: products_db  # Nombre de la base de datos para productos
+      POSTGRES_DB: products_db
     ports:
       - "5435:5432"
     volumes:
@@ -116,12 +110,11 @@ services:
     networks:
       - dev_network
 
-  # Servicio de Nginx
   nginx:
     build:
       context: ./nginx
     ports:
-      - "80:80"  # Exponiendo el puerto 80 para Nginx
+      - "80:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
@@ -132,7 +125,6 @@ services:
     networks:
       - dev_network
 
-  # Servicio de PgAdmin para la administración de las bases de datos
   pgadmin:
     image: dpage/pgadmin4
     container_name: dev_pgadmin

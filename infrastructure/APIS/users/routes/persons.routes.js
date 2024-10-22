@@ -12,12 +12,18 @@ const router = Router();
 /**
  * Importing methods or controllers
  */
-const { addPerson, deletePerson, editPerson, showPerson, showPeople } = require('../controllers/people.controllers');
+const { 
+    addPerson, 
+    deletePerson, 
+    editPerson, 
+    showPerson,
+    showPersons
+} = require('../controllers/people.controllers');
 
 /**
  * Routes
  */
-router.get('/', showPeople);    
+router.get('/', showPersons);    
 router.post('/', addPerson);    
 router.delete('/:id', deletePerson); 
 router.put('/:id', editPerson);  

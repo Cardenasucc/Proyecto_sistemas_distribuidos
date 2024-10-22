@@ -11,41 +11,32 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-const showPeople = async (req = request, res = response) => {
+const showPersons = async (req = request, res = response) => {
     try {
-        const people = await prisma.person.findMany();
-        res.json({
-            people
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
+        const persons = await prisma.persons.findMany();
+        res.json({ persons });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     } finally {
         await prisma.$disconnect();
     }
 };
 
 const addPerson = async (req = request, res = response) => {
-    const { name, lastname, number, published, userId } = req.body;
-
+    const { name, lastname, number, published, user_id } = req.body;
     try {
-        const newPerson = await prisma.person.create({
+        const newPerson = await prisma.persons.create({
             data: {
                 name,
                 lastname,
                 number,
                 published,
-                userId
+                user_id
             }
         });
-        res.json({
-            newPerson
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
+        res.status(201).json({ newPerson });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     } finally {
         await prisma.$disconnect();
     }
@@ -53,25 +44,14 @@ const addPerson = async (req = request, res = response) => {
 
 const showPerson = async (req = request, res = response) => {
     const { id } = req.params;
-
     try {
-        const person = await prisma.person.findUnique({
-            where: { id: Number(id) }
-        });
-
+        const person = await prisma.persons.findUnique({ where: { id: Number(id) } });
         if (!person) {
-            return res.status(404).json({
-                message: 'Person not found'
-            });
+            return res.status(404).json({ message: 'Person not found' });
         }
-
-        res.json({
-            person
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
+        res.json({ person });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     } finally {
         await prisma.$disconnect();
     }
@@ -79,27 +59,21 @@ const showPerson = async (req = request, res = response) => {
 
 const editPerson = async (req = request, res = response) => {
     const { id } = req.params;
-    const { name, lastname, number, published, userId } = req.body;
-
+    const { name, lastname, number, published, user_id } = req.body;
     try {
-        const updatedPerson = await prisma.person.update({
+        const updatedPerson = await prisma.persons.update({
             where: { id: Number(id) },
             data: {
                 name,
                 lastname,
                 number,
                 published,
-                userId
+                user_id
             }
         });
-
-        res.json({
-            updatedPerson
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
+        res.json({ updatedPerson });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     } finally {
         await prisma.$disconnect();
     }
@@ -107,27 +81,21 @@ const editPerson = async (req = request, res = response) => {
 
 const deletePerson = async (req = request, res = response) => {
     const { id } = req.params;
-
     try {
-        const deletedPerson = await prisma.person.delete({
-            where: { id: Number(id) }
+        const deletedPerson = await prisma.persons.delete({
+            where: { id: Number(id) },
         });
-
-        res.json({
-            deletedPerson
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: error.message
-        });
+        res.json({ deletedPerson });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
     } finally {
         await prisma.$disconnect();
     }
 };
 
 module.exports = {
+    showPersons,
     addPerson,
-    showPeople,
     showPerson,
     editPerson,
     deletePerson

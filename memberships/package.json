@@ -4,7 +4,7 @@
   "description": "memberships microservices",
   "main": "app.js",
   "scripts": {
-    "install-all": "npm install @prisma/client cors crypto-js cryptojs dotenv express jsonwebtoken prisma sqlite",
+    "install-all": "npm install @prisma/client cors crypto-js cryptojs dotenv express jsonwebtoken prisma",
     "install-dev": "npm install nodemon -D",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +18,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
-    "prisma": "^5.20.0",
-    "sqlite": "^5.1.1"
+    "prisma": "^5.20.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.7"
