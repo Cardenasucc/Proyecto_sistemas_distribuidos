@@ -2,46 +2,104 @@
  * @author deivid & santiago
  * @version 1.0.0
  * 
- * Product controllers
- * This file defines product controllers
+ * Product Controller
+ * This file defines the product controllers
  */
 
-const {response, request} = require('express')
+const { response, request } = require('express');
+const { PrismaClient } = require('@prisma/client');
 
-const ShowProducts = async(req=request, res=response)=>{
-    res.json({
-        "Hi": "I am the answer to show products"
-    });
+const prisma = new PrismaClient();
+
+const showProducts = async (req = request, res = response) => {
+    try {
+        const products = await prisma.product.findMany({
+            include: { category: true } // Incluye la categoría asociada
+        });
+        res.json({ products });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    } finally {
+        await prisma.$disconnect();
+    }
 };
 
-const ShowProduct = async(req=request, res=response)=>{
-    res.json({
-        "Hi": "I am the answer to show product"
-    });
+const addProduct = async (req = request, res = response) => {
+    const { name, description, price, quantity, categoryId } = req.body;
+    try {
+        const newProduct = await prisma.product.create({
+            data: {
+                name,
+                description,
+                price,
+                quantity,
+                category: { connect: { id: categoryId } }
+            }
+        });
+        res.status(201).json({ newProduct });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    } finally {
+        await prisma.$disconnect();
+    }
 };
 
-const AddProducts = async(req=request, res=response)=>{
-    res.json({
-        "Hi": "I am the answer to add products"
-    });
+const showProduct = async (req = request, res = response) => {
+    const { id } = req.params;
+    try {
+        const product = await prisma.product.findUnique({
+            where: { id: Number(id) },
+            include: { category: true }
+        });
+        if (!product) return res.status(404).json({ message: 'Product not found' });
+        res.json({ product });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    } finally {
+        await prisma.$disconnect();
+    }
 };
 
-const DeleteProducts = async(req=request, res=response)=>{
-    res.json({
-        "Hi": "I am the answer to delete products"
-    });
+const editProduct = async (req = request, res = response) => {
+    const { id } = req.params;
+    const { name, description, price, quantity, categoryId } = req.body;
+    try {
+        const updatedProduct = await prisma.product.update({
+            where: { id: Number(id) },
+            data: {
+                name,
+                description,
+                price,
+                quantity,
+                category: { connect: { id: categoryId } }
+            }
+        });
+        res.json({ updatedProduct });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    } finally {
+        await prisma.$disconnect();
+    }
 };
 
-const EditProducts = async(req=request, res=response)=>{
-    res.json({
-        "Hi": "I am the answer to edit products"
-    });
+const deleteProduct = async (req = request, res = response) => {
+    const { id } = req.params;
+    try {
+        const deletedProduct = await prisma.product.delete({
+            where: { id: Number(id) }
+        });
+        res.json({ deletedProduct });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    } finally {
+        await prisma.$disconnect();
+    }
 };
 
 module.exports = {
-    ShowProducts,
-    ShowProduct,
-    AddProducts,
-    DeleteProducts,
-    EditProducts
+    showProducts,
+    addProduct,
+    showProduct,
+    editProduct,
+    deleteProduct
 };

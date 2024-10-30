@@ -6,30 +6,29 @@
  * This file defines product routes
  */
 
-const {Router} = require('express');
-
-const router = Router(); 
+const { Router } = require('express');
+const router = Router();
 
 /**
  * Importing methods or controllers
  */
 
 const {
-    ShowProducts, 
-    ShowProduct, 
-    AddProducts, 
-    DeleteProducts, 
-    EditProducts
-} = require ('../controllers/products.controllers');
+    showProducts, 
+    showProduct, 
+    addProduct, 
+    deleteProduct, 
+    editProduct
+} = require('../controllers/products.controllers');
 
 /**
  * Routes
  */
 
-router.get('/', ShowProducts);
-router.get('/:id', ShowProduct);
-router.post('/', AddProducts);
-router.delete('/', DeleteProducts);
-router.put('/', EditProducts);
+router.get('/', showProducts);             // Obtiene todos los productos
+router.get('/:id', showProduct);           // Obtiene un producto por ID
+router.post('/', addProduct);              // Agrega un nuevo producto
+router.delete('/:id', deleteProduct);      // Elimina un producto por ID
+router.put('/:id', editProduct);           // Edita un producto por ID
 
 module.exports = router;

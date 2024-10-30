@@ -4,23 +4,24 @@ services:
   users_api:
     build:
       context: ./APIS
+      dockerfile: Dockerfile.users
     deploy:
       replicas: 1
       resources:
         limits:
           cpus: '0.2'
-          memory: 4GB
+          memory: 2GB
         reservations:
           cpus: '0.1'
           memory: 1GB
     ports:
-      - "3001:3000" 
+      - "3100:3100" 
     volumes:
       - ./APIS/users:/usr/userAPI
     networks:
       - dev_network
     environment:
-      DATABASE_URL: postgres://postgres:12345@users_db:5432/users_db 
+      DATABASE_URL: postgres://postgres:12345@users_db:5432/users_db?schema=public
 
   users_db:
     image: postgres
@@ -29,23 +30,33 @@ services:
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: users_db
     ports:
-      - "5432:5432"
+      - "5100:5432"
     volumes:
-      - ./users_data:/var/lib/postgresql/data
+      - ./users_data:/var/lib/postgres/data
     networks:
       - dev_network
 
   orders_api:
     build:
       context: ./APIS
+      dockerfile: Dockerfile.orders
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 2GB
+        reservations:
+          cpus: '0.1'
+          memory: 1GB
     ports:
-      - "3002:3000"  
+      - "3200:3200"  
     volumes:
       - ./APIS/orders:/ord/ordersAPI
     networks:
       - dev_network
     environment:
-      DATABASE_URL: postgres://postgres:12345@orders_db:5432/orders_db 
+      DATABASE_URL: postgres://postgres:12345@orders_db:5432/orders_db?schema=public
 
   orders_db:
     image: postgres
@@ -54,23 +65,33 @@ services:
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: orders_db
     ports:
-      - "5433:5432"
+      - "5200:5432"
     volumes:
-      - ./orders_data:/var/lib/postgresql/data
+      - ./orders_data:/var/lib/postgres/data
     networks:
       - dev_network
 
   memberships_api:
     build:
       context: ./APIS
+      dockerfile: Dockerfile.memberships
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 2GB
+        reservations:
+          cpus: '0.1'
+          memory: 1GB
     ports:
-      - "3003:3000"  
+      - "3300:3300"  
     volumes:
       - ./APIS/memberships:/ord/membershipsAPI
     networks:
       - dev_network
     environment:
-      DATABASE_URL: postgres://postgres:12345@memberships_db:5432/memberships_db 
+      DATABASE_URL: postgres://postgres:12345@memberships_db:5432/memberships_db?schema=public
 
   memberships_db:
     image: postgres
@@ -79,23 +100,33 @@ services:
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: memberships_db
     ports:
-      - "5434:5432"
+      - "5300:5432"
     volumes:
-      - ./memberships_data:/var/lib/postgresql/data
+      - ./memberships_data:/var/lib/postgres/data
     networks:
       - dev_network
 
   products_api:
     build:
       context: ./APIS
+      dockerfile: Dockerfile.products
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 2GB
+        reservations:
+          cpus: '0.1'
+          memory: 1GB
     ports:
-      - "3004:3000"
+      - "3400:3400"
     volumes:
       - ./APIS/products:/mem/productsAPI
     networks:
       - dev_network
     environment:
-      DATABASE_URL: postgres://postgres:12345@products_db:5432/products_db 
+      DATABASE_URL: postgres://postgres:12345@products_db:5432/products_dbschema=public 
 
   products_db:
     image: postgres
@@ -104,9 +135,9 @@ services:
       POSTGRES_PASSWORD: 12345
       POSTGRES_DB: products_db
     ports:
-      - "5435:5432"
+      - "5400:5432"
     volumes:
-      - ./products_data:/var/lib/postgresql/data
+      - ./products_data:/var/lib/postgres/data
     networks:
       - dev_network
 
