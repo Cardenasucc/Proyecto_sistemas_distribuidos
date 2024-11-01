@@ -126,7 +126,7 @@ services:
     networks:
       - dev_network
     environment:
-      DATABASE_URL: postgres://postgres:12345@products_db:5432/products_dbschema=public 
+      DATABASE_URL: postgres://postgres:12345@products_db:5432/products_db?schema=public 
 
   products_db:
     image: postgres
