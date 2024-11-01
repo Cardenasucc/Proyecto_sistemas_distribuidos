@@ -12,7 +12,6 @@ const router = Router();
 /**
  * Importing methods or controllers
  */
-
 const {
     showProducts, 
     showProduct, 
@@ -24,11 +23,10 @@ const {
 /**
  * Routes
  */
-
-router.get('/', showProducts);             // Obtiene todos los productos
-router.get('/:id', showProduct);           // Obtiene un producto por ID
-router.post('/', addProduct);              // Agrega un nuevo producto
-router.delete('/:id', deleteProduct);      // Elimina un producto por ID
-router.put('/:id', editProduct);           // Edita un producto por ID
+router.get('/', showProducts);
+router.get('/:id', showProduct);
+router.post('/', addProduct);
+router.delete('/:id', deleteProduct);
+router.put('/:id', editProduct);   
 
 module.exports = router;

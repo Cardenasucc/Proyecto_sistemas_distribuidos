@@ -14,7 +14,7 @@ const prisma = new PrismaClient();
 const showProducts = async (req = request, res = response) => {
     try {
         const products = await prisma.product.findMany({
-            include: { category: true } // Incluye la categoría asociada
+            include: { category: true }
         });
         res.json({ products });
     } catch (err) {

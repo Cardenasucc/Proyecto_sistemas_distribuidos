@@ -18,7 +18,7 @@ const express = require('express');
 
 class Server{
 
-    constructor(port = 3000, path = '/api/') {
+    constructor(port = 3200, path = '/api/') {
         this.app = express();
         this.port = port;
         this.path = path;
@@ -32,7 +32,7 @@ class Server{
 
     routes(){
         this.app.use('/orders', require('../routes/orders.routes'));
-        this.app.use('/orders', require('../routes/orders_items.routes'));
+        this.app.use('/orders', require('../routes/orders.items.routes'));
     }
 
     listen(){

@@ -18,7 +18,7 @@ const {
     showOrderItem,
     editOrderItem,
     deleteOrderItem
-} = require('../controllers/order_items.controllers');
+} = require('../controllers/orders.items.controllers');
 
 /**
  * Routes
