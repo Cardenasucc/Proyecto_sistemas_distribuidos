@@ -17,7 +17,7 @@ services:
     ports:
       - "3100:3100" 
     volumes:
-      - ./APIS/users:/usr/userAPI
+      - ./APIS/users:/usr/usersAPI
     networks:
       - dev_network
     environment:
@@ -87,7 +87,7 @@ services:
     ports:
       - "3300:3300"  
     volumes:
-      - ./APIS/memberships:/ord/membershipsAPI
+      - ./APIS/memberships:/mem/membershipsAPI
     networks:
       - dev_network
     environment:
@@ -122,7 +122,7 @@ services:
     ports:
       - "3400:3400"
     volumes:
-      - ./APIS/products:/mem/productsAPI
+      - ./APIS/products:/pro/productsAPI
     networks:
       - dev_network
     environment:
