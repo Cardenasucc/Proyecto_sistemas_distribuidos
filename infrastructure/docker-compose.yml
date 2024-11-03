@@ -22,6 +22,8 @@ services:
       - dev_network
     environment:
       DATABASE_URL: postgres://postgres:12345@users_db:5432/users_db?schema=public
+    depends_on:
+      - users_db
 
   users_db:
     image: postgres
@@ -57,6 +59,8 @@ services:
       - dev_network
     environment:
       DATABASE_URL: postgres://postgres:12345@orders_db:5432/orders_db?schema=public
+    depends_on:
+      - orders_db
 
   orders_db:
     image: postgres
@@ -92,6 +96,8 @@ services:
       - dev_network
     environment:
       DATABASE_URL: postgres://postgres:12345@memberships_db:5432/memberships_db?schema=public
+    depends_on:
+      - memberships_db
 
   memberships_db:
     image: postgres
@@ -127,6 +133,8 @@ services:
       - dev_network
     environment:
       DATABASE_URL: postgres://postgres:12345@products_db:5432/products_db?schema=public 
+    depends_on:
+      - products_db
 
   products_db:
     image: postgres
