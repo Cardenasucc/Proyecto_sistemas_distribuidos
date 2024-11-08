@@ -149,6 +149,43 @@ services:
     networks:
       - dev_network
 
+  payments_api:
+    build:
+      context: ./APIS
+      dockerfile: Dockerfile.payments
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 2GB
+        reservations:
+          cpus: '0.1'
+          memory: 1GB
+    ports:
+      - "3500:3400"
+    volumes:
+      - ./APIS/payments:/pay/paymentsAPI
+    networks:
+      - dev_network
+    environment:
+      DATABASE_URL: postgres://postgres:12345@payments_db:5432/payments_db?schema=public 
+    depends_on:
+      - payments_db
+
+  payments_db:
+    image: postgres
+    container_name: payments_db
+    environment:
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: payments_db
+    ports:
+      - "500:5432"
+    volumes:
+      - ./payments_data:/var/lib/postgres/data
+    networks:
+      - dev_network
+
   nginx:
     build:
       context: ./nginx
@@ -161,6 +198,7 @@ services:
       - orders_api
       - memberships_api
       - products_api
+      - payments_api
     networks:
       - dev_network
 

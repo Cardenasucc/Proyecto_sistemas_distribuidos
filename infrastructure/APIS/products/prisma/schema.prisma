@@ -16,7 +16,6 @@ model Product {
   quantity    Int
   category    Category   @relation(fields: [categoryId], references: [id])
   categoryId  Int
-  //orderItems  OrderItem[]
 }
 
 model Category {

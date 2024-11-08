@@ -12,6 +12,7 @@ WORKDIR /ord/ordersAPI
 COPY orders/package*.json ./
 RUN npm install prisma
 RUN npm install @prisma/client
+RUN npm install graphql apollo-server-express
 RUN npm install cors
 RUN npm install crypto-js
 RUN npm install cryptojs

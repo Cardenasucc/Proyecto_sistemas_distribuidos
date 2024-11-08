@@ -13,7 +13,5 @@ model Membership {
   type      String
   startDate DateTime
   endDate   DateTime
-  //person    Person    @relation(fields: [personId], references: [id])
-  //personId  Int
   //orderItems OrderItem[]
 }

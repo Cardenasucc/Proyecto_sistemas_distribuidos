@@ -1,43 +1,20 @@
 /**
- * @author deivid & santiago
+ * @author Deivid & Santiago
  * @version 1.0.0
  * 
- * Service the express
- * This class calls methods for a server
+ * @class Server class that starts the Express server and sets up GraphQL
  */
 
-/**
- * importing variables
- */
+const app = require('../app');
 
-const express = require('express');
-
-/**
- * @class server class that starts the express server
- */
-
-class Server{
-
-    constructor(port = 3100, path = '/api/') {
-        this.app = express();
+class Server {
+    constructor(port = 3100) {
         this.port = port;
-        this.path = path;
-        this.middlewares();
-        this.routes();
     }
 
-    middlewares(){
-        this.app.use(express.json());
-    }
-
-    routes(){
-        this.app.use('/users', require('../routes/users.routes'));
-        this.app.use('/users', require('../routes/persons.routes'));
-    }
-
-    listen(){
-        this.app.listen(this.port, () => {
-            console.log(`Server running on the port: ${this.port}`);     
+    listen() {
+        app.listen(this.port, () => {
+            console.log(`Server running on http://localhost:${this.port}`);
         }).on('error', (err) => {
             console.error('Error starting server:', err);
         });
@@ -45,3 +22,4 @@ class Server{
 }
 
 module.exports = Server;
+

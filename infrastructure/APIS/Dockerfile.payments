@@ -1,0 +1,27 @@
+FROM node:20
+
+RUN apt-get update && apt-get install -y wget nano && rm -rf /var/lib/apt/lists/*
+
+RUN npm cache clean --force
+
+RUN npm install -g npm@8.12.1
+
+RUN mkdir -p /pay/paymentsAPI 
+
+WORKDIR /pay/paymentsAPI 
+COPY payments/package*.json ./
+RUN npm install prisma
+RUN npm install @prisma/client
+RUN npm install graphql apollo-server-express
+RUN npm install cors
+RUN npm install crypto-js
+RUN npm install cryptojs
+RUN npm install express
+RUN npm install jsonwebtoken
+RUN npm install nodemon
+RUN npm install dotenv
+COPY payments/ ./
+
+RUN npx prisma generate
+
+CMD ["npx", "nodemon", "app.js"]
