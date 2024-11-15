@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   users_api:
     build:
@@ -207,16 +205,6 @@ services:
       - dev_network
 
 
-  frontend:
-    build:
-      context: ./frontend  # Ruta donde está la carpeta del frontend
-    ports:
-      - "3000:80"  # Mapea el puerto 3000 en tu máquina al puerto 80 en el contenedor
-    networks:
-      - dev_network
-    depends_on:
-      - nginx  # Esto asegura que Nginx esté activo antes que el frontend
-      
   nginx:
     build:
       context: ./nginx
