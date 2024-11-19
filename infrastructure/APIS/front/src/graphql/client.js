@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import API_ROUTES from './config/apiRoutes';
 
+
 export const usersClient = new ApolloClient({
   uri: API_ROUTES.users,
   cache: new InMemoryCache(),

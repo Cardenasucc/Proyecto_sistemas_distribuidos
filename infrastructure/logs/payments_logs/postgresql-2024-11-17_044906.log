@@ -1,0 +1,28 @@
+2024-11-17 04:49:06.665 GMT [1]     LOG:  00000: starting PostgreSQL 17.1 (Debian 17.1-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2024-11-17 04:49:06.665 GMT [1]     LOCATION:  PostmasterMain, postmaster.c:1080
+2024-11-17 04:49:06.670 GMT [1]     LOG:  00000: listening on IPv4 address "0.0.0.0", port 5432
+2024-11-17 04:49:06.670 GMT [1]     LOCATION:  ListenServerPort, pqcomm.c:661
+2024-11-17 04:49:06.670 GMT [1]     LOG:  00000: listening on IPv6 address "::", port 5432
+2024-11-17 04:49:06.670 GMT [1]     LOCATION:  ListenServerPort, pqcomm.c:661
+2024-11-17 04:49:07.392 GMT [1]     LOG:  00000: listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2024-11-17 04:49:07.392 GMT [1]     LOCATION:  ListenServerPort, pqcomm.c:657
+2024-11-17 04:49:07.544 GMT [67]     LOG:  00000: database system was shut down at 2024-11-17 04:49:05 GMT
+2024-11-17 04:49:07.544 GMT [67]     LOCATION:  StartupXLOG, xlog.c:5445
+2024-11-17 04:49:07.651 GMT [1]     LOG:  00000: database system is ready to accept connections
+2024-11-17 04:49:07.651 GMT [1]     LOCATION:  process_pm_child_exit, postmaster.c:2483
+2024-11-17 04:54:07.564 GMT [65]     LOG:  00000: checkpoint starting: time
+2024-11-17 04:54:07.564 GMT [65]     LOCATION:  LogCheckpointStart, xlog.c:6661
+2024-11-17 04:54:10.526 GMT [65]     LOG:  00000: checkpoint complete: wrote 27 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.542 s, sync=0.227 s, total=2.963 s; sync files=11, longest=0.038 s, average=0.021 s; distance=97 kB, estimate=97 kB; lsn=0/1920F90, redo lsn=0/1920F38
+2024-11-17 04:54:10.526 GMT [65]     LOCATION:  LogCheckpointEnd, xlog.c:6750
+2024-11-17 05:50:04.884 GMT [1]     LOG:  00000: received fast shutdown request
+2024-11-17 05:50:04.884 GMT [1]     LOCATION:  process_pm_shutdown_request, postmaster.c:2273
+2024-11-17 05:50:05.005 GMT [1]     LOG:  00000: aborting any active transactions
+2024-11-17 05:50:05.005 GMT [1]     LOCATION:  process_pm_shutdown_request, postmaster.c:2291
+2024-11-17 05:50:05.013 GMT [1]     LOG:  00000: background worker "logical replication launcher" (PID 70) exited with exit code 1
+2024-11-17 05:50:05.013 GMT [1]     LOCATION:  LogChildExit, postmaster.c:3076
+2024-11-17 05:50:05.019 GMT [65]     LOG:  00000: shutting down
+2024-11-17 05:50:05.019 GMT [65]     LOCATION:  ShutdownXLOG, xlog.c:6611
+2024-11-17 05:50:05.227 GMT [65]     LOG:  00000: checkpoint starting: shutdown immediate
+2024-11-17 05:50:05.227 GMT [65]     LOCATION:  LogCheckpointStart, xlog.c:6661
+2024-11-17 05:50:05.769 GMT [65]     LOG:  00000: checkpoint complete: wrote 0 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.122 s, sync=0.001 s, total=0.750 s; sync files=0, longest=0.000 s, average=0.000 s; distance=0 kB, estimate=87 kB; lsn=0/1921040, redo lsn=0/1921040
+2024-11-17 05:50:05.769 GMT [65]     LOCATION:  LogCheckpointEnd, xlog.c:6750

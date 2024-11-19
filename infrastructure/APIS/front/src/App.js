@@ -2,7 +2,8 @@ import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import client from './graphql/client';
-import Users from './components/Users/Users';
+import Users from './components/Users/UsersComponents';
+
 import Orders from './components/Orders/Orders';
 import Memberships from './components/Memberships/Memberships';
 

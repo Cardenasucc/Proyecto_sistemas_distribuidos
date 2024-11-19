@@ -36,7 +36,7 @@ services:
     volumes:
       - ./data/users_data:/var/lib/postgresql/data
       - ./logs//users_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./postgresql.configs:/etc/postgresql
     networks:
       - dev_network
 
@@ -77,7 +77,7 @@ services:
     volumes:
       - ./data/orders_data:/var/lib/postgresql/data
       - ./logs/orders_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./postgresql.configs:/etc/postgresql
     networks:
       - dev_network
 
@@ -118,7 +118,7 @@ services:
     volumes:
       - ./data/memberships_data:/var/lib/postgresql/data
       - ./logs/memberships_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./postgresql.configs:/etc/postgresql
     networks:
       - dev_network
 
@@ -159,7 +159,7 @@ services:
     volumes:
       - ./data/products_data:/var/lib/postgresql/data
       - ./logs/products_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./postgresql.configs:/etc/postgresql
     networks:
       - dev_network
 
@@ -200,7 +200,7 @@ services:
     volumes:
       - ./data/payments_data:/var/lib/postgresql/data
       - ./logs/payments_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./postgresql.configs:/etc/postgresql
     networks:
       - dev_network
 

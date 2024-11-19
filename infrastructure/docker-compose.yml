@@ -28,7 +28,7 @@ services:
   users_db:
     build:
       context: ./APIS
-      dockerfile: Dockerfile.postgres_base
+      dockerfile: Dockerfile.postgres
     container_name: users_db
     environment:
       POSTGRES_PASSWORD: 12345
@@ -38,7 +38,7 @@ services:
     volumes:
       - ./data/users_data:/var/lib/postgresql/data
       - ./logs//users_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./APIS/postgresql.configs/postgresql.conf:/etc/postgresql/postgresql.conf 
     networks:
       - dev_network
 
@@ -69,7 +69,7 @@ services:
   orders_db:
     build:
       context: ./APIS
-      dockerfile: Dockerfile.postgres_base
+      dockerfile: Dockerfile.postgres
     container_name: orders_db
     environment:
       POSTGRES_PASSWORD: 12345
@@ -79,7 +79,7 @@ services:
     volumes:
       - ./data/orders_data:/var/lib/postgresql/data
       - ./logs/orders_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./APIS/postgresql.configs/postgresql.conf:/etc/postgresql/postgresql.conf 
     networks:
       - dev_network
 
@@ -110,7 +110,7 @@ services:
   memberships_db:
     build:
       context: ./APIS
-      dockerfile: Dockerfile.postgres_base
+      dockerfile: Dockerfile.postgres
     container_name: memberships_db
     environment:
       POSTGRES_PASSWORD: 12345
@@ -120,7 +120,7 @@ services:
     volumes:
       - ./data/memberships_data:/var/lib/postgresql/data
       - ./logs/memberships_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./APIS/postgresql.configs/postgresql.conf:/etc/postgresql/postgresql.conf 
     networks:
       - dev_network
 
@@ -151,7 +151,7 @@ services:
   products_db:
     build:
       context: ./APIS
-      dockerfile: Dockerfile.postgres_base
+      dockerfile: Dockerfile.postgres
     container_name: products_db
     environment:
       POSTGRES_PASSWORD: 12345
@@ -161,7 +161,7 @@ services:
     volumes:
       - ./data/products_data:/var/lib/postgresql/data
       - ./logs/products_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./APIS/postgresql.configs/postgresql.conf:/etc/postgresql/postgresql.conf 
     networks:
       - dev_network
 
@@ -192,7 +192,7 @@ services:
   payments_db:
     build:
       context: ./APIS
-      dockerfile: Dockerfile.postgres_base
+      dockerfile: Dockerfile.postgres
     container_name: payments_db
     environment:
       POSTGRES_PASSWORD: 12345
@@ -202,20 +202,21 @@ services:
     volumes:
       - ./data/payments_data:/var/lib/postgresql/data
       - ./logs/payments_logs:/var/log/postgresql
-      - ./postgresql_configs:/etc/postgresql
+      - ./APIS/postgresql.configs/postgresql.conf:/etc/postgresql/postgresql.conf 
     networks:
       - dev_network
 
 
-  frontend:
-    build:
-      context: ./frontend  # Ruta donde está la carpeta del frontend
-    ports:
-      - "3000:80"  # Mapea el puerto 3000 en tu máquina al puerto 80 en el contenedor
-    networks:
-      - dev_network
-    depends_on:
-      - nginx  # Esto asegura que Nginx esté activo antes que el frontend
+  #frontend:
+   # build:
+    #  context: ./APIS 
+     # dockerfile: Dockerfile.frontend
+    #ports:
+     # - "3000:80"
+    #networks:
+     # - dev_network
+    #depends_on:
+     # - nginx 
       
   nginx:
     build:
@@ -241,6 +242,8 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: deivid@cardenas.com
       PGADMIN_DEFAULT_PASSWORD: 123456
+    volumes:
+      - ./pgadmin.data:/var/lib/pgadmin
     networks:
       - dev_network
 
