@@ -1,0 +1,147 @@
+/* src/components/Orders/Orders.css */
+
+.orders-container {
+  padding: 20px;
+  background-color: #ffffff1a;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.orders-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.orders-list {
+  list-style-type: none;
+  color: #ffffff;
+  padding: 0;
+}
+
+.order-item {
+  background-color: #ffffff33;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.order-item strong {
+  color: #ff0000;
+}
+
+/* Estilos para el botón de registrar nueva orden */
+.btn-register {
+  padding: 10px 15px;
+  background-color: #45a049; /* Color del botón */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-register:hover {
+  background-color: #0056b3; /* Color al pasar el mouse sobre el botón */
+}
+
+/* Estilos para el modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #141212;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: relative; /* Necesario para el posicionamiento del botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #ff0000; /* Cambia a rojo al pasar el mouse */
+}
+
+/* Estilos del formulario */
+.form-title {
+  font-size: 1.5em;
+  margin: 20px 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-input {
+  padding: 10px;
+  border: 1px solid #ccc; /* Cambia a un borde más claro */
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: #4CAF50; /* Color de borde al enfocar */
+  outline: none; /* Eliminar el contorno predeterminado */
+}
+
+.form-button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50; /* Color de fondo para el botón */
+  color: #ffffff; /* Color del texto */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+.form-button:hover {
+  background-color: #45a049; /* Color de fondo al pasar el mouse sobre el botón */
+}
+/* Estilos para el botón de agregar artículo */
+.btn-add-item {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #28a745; /* Color del botón de agregar */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-add-item:hover {
+  background-color: #218838; /* Color al pasar el mouse sobre el botón */
+}
+
+/* Estilos para los elementos del formulario de artículos */
+.order-item-form {
+  display: flex;
+  gap: 10px; /* Espacio entre los campos */
+  margin-bottom: 10px; /* Espacio debajo de cada conjunto de campos */
+}

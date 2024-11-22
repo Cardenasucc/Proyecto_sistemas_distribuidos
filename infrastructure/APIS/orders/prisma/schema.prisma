@@ -5,22 +5,19 @@ generator client {
 
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_ORDERS")
 }
 
 model Order {
   id        Int          @id @default(autoincrement())
-  user_id   Int
   orderDate DateTime
-  items     OrderItem[]
+  items     OrderItem[]  // Relación con OrderItem
+  name      String       // Nombre de la orden
 }
 
 model OrderItem {
   id         Int       @id @default(autoincrement())
   order      Order     @relation(fields: [orderId], references: [id])
   orderId    Int
-  //product    Product   @relation(fields: [productId], references: [id])
-  //productId  Int
-  //quantity   Int
-  //price      Float
+  name       String    // Nombre del ítem dentro de la orden
 }

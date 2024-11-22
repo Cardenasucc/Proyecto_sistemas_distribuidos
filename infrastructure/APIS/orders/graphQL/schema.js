@@ -14,12 +14,14 @@ const typeDefs = gql`
     id: Int
     user_id: Int
     orderDate: String
+    name: String  # Agregar el nombre de la orden
     items: [OrderItem]
   }
 
   type OrderItem {
     id: Int
     orderId: Int
+    name: String  # Agregar el nombre del ítem
   }
 
   type Query {
@@ -28,13 +30,14 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createOrder(user_id: Int!, orderDate: String!, items: [OrderItemInput]!): Order
-    updateOrder(id: Int!, user_id: Int, orderDate: String, items: [OrderItemInput]): Order
+    createOrder(user_id: Int!, orderDate: String!, name: String!, items: [OrderItemInput]!): Order
+    updateOrder(id: Int!, user_id: Int, orderDate: String, name: String, items: [OrderItemInput]): Order
     deleteOrder(id: Int!): String
   }
 
   input OrderItemInput {
     orderId: Int!
+    name: String!  # Agregar el nombre del ítem al input
   }
 `;
 
@@ -57,14 +60,16 @@ const resolvers = {
     },
   },
   Mutation: {
-    createOrder: async (_, { user_id, orderDate, items }) => {
+    createOrder: async (_, { user_id, orderDate, name, items }) => {
       const orderItems = items.map((item) => ({
         orderId: item.orderId,
+        name: item.name,  // Guardar el nombre de cada ítem
       }));
       return await prisma.order.create({
         data: {
           user_id,
           orderDate: new Date(orderDate),
+          name,  // Guardar el nombre de la orden
           items: {
             create: orderItems,
           },
@@ -74,13 +79,14 @@ const resolvers = {
         },
       });
     },
-    updateOrder: async (_, { id, user_id, orderDate, items }) => {
+    updateOrder: async (_, { id, user_id, orderDate, name, items }) => {
       if (items) {
         await prisma.orderItem.deleteMany({
           where: { orderId: id },
         });
         const updatedItems = items.map((item) => ({
           orderId: id,
+          name: item.name,  // Guardar el nombre de cada ítem actualizado
         }));
         await prisma.order.update({
           where: { id },
@@ -97,6 +103,7 @@ const resolvers = {
         data: {
           user_id,
           orderDate: orderDate ? new Date(orderDate) : undefined,
+          name,  // Actualizar el nombre de la orden
         },
         include: {
           items: true,

@@ -1,1 +1,1 @@
-/usr/lib/postgresql/17/bin/postgres "-c" "config_file=/etc/postgresql/postgresql.conf"
+/usr/lib/postgresql/17/bin/postgres "-D" "/var/lib/postgresql/data" "-c" "config_file=/etc/postgresql/postgresql.conf" "-c" "listen_addresses=" "-p" "5432"

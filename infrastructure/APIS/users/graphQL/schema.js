@@ -4,30 +4,25 @@
  * 
  * This file defines the GraphQL framework and solvers to handle CRUD operations on orders and their items.
  */
-
 const { gql } = require('apollo-server-express');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
-
 const typeDefs = gql`
   type User {
     id: Int
     name: String
     email: String
   }
-
   type Query {
     users: [User]
     getUserById(id: Int!): User
   }
-
   type Mutation {
     createUser(email: String!, password: String!): User
     updateUser(id: Int!, email: String, name: String, password: String): User
     deleteUser(id: Int!): User
   }
 `;
-
 const resolvers = {
   Query: {
     users: async () => {
@@ -91,5 +86,4 @@ const resolvers = {
     },
   },
 };
-
 module.exports = { typeDefs, resolvers };

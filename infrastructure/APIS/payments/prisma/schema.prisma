@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgres"
-  url      = env("DATABASE_URL")
+  url      = env("DATABASE_URL_PAYMENTS")
 }
 
 model Payment {
@@ -12,9 +12,5 @@ model Payment {
   userId       Int
   orderId      Int
   amount       Int 
-  //paymentDate  DateTime    @default(now()) @db.Timestamp(6)
   status       String
-
-  //user         User        @relation(fields: [userId], references: [id])
-  //order        Order       @relation(fields: [orderId], references: [id])
 }

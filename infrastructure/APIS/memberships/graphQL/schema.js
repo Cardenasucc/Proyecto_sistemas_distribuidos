@@ -35,9 +35,11 @@ const resolvers = {
       return await prisma.membership.findMany();
     },
     membershipById: async (_, { id }) => {
-      return await prisma.membership.findUnique({
+      const membership = await prisma.membership.findUnique({
         where: { id },
       });
+      if (!membership) throw new Error(`Membership with ID ${id} not found.`);
+      return membership;
     },
   },
   Mutation: {
@@ -51,7 +53,7 @@ const resolvers = {
       });
     },
     updateMembership: async (_, { id, type, startDate, endDate }) => {
-      return await prisma.membership.update({
+      const membership = await prisma.membership.update({
         where: { id },
         data: {
           type,
@@ -59,6 +61,8 @@ const resolvers = {
           endDate: endDate ? new Date(endDate) : undefined,
         },
       });
+      if (!membership) throw new Error(`Membership with ID ${id} not found.`);
+      return membership;
     },
     deleteMembership: async (_, { id }) => {
       await prisma.membership.delete({

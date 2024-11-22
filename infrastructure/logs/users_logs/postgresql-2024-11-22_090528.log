@@ -1,0 +1,30 @@
+2024-11-22 09:05:28.604 GMT [49]     LOG:  00000: starting PostgreSQL 17.1 (Debian 17.1-1.pgdg120+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2024-11-22 09:05:28.604 GMT [49]     LOCATION:  PostmasterMain, postmaster.c:1080
+2024-11-22 09:05:29.027 GMT [49]     LOG:  00000: listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2024-11-22 09:05:29.027 GMT [49]     LOCATION:  ListenServerPort, pqcomm.c:657
+2024-11-22 09:05:30.713 GMT [53]     LOG:  00000: database system was shut down at 2024-11-22 09:05:04 GMT
+2024-11-22 09:05:30.713 GMT [53]     LOCATION:  StartupXLOG, xlog.c:5445
+2024-11-22 09:05:31.035 GMT [49]     LOG:  00000: database system is ready to accept connections
+2024-11-22 09:05:31.035 GMT [49]     LOCATION:  process_pm_child_exit, postmaster.c:2483
+2024-11-22 09:05:41.294 GMT [59] postgres postgres psql [local] LOG:  00000: statement: SELECT 1 FROM pg_database WHERE datname = 'users_db' ;
+2024-11-22 09:05:41.294 GMT [59] postgres postgres psql [local] LOCATION:  exec_simple_query, postgres.c:1075
+2024-11-22 09:05:41.347 GMT [59] postgres postgres psql [local] LOG:  00000: AUDIT: SESSION,1,1,READ,SELECT,,,SELECT 1 FROM pg_database WHERE datname = 'users_db',<not logged>
+2024-11-22 09:05:41.347 GMT [59] postgres postgres psql [local] LOCATION:  log_audit_event, pgaudit.c:875
+2024-11-22 09:05:41.348 GMT [59] postgres postgres psql [local] LOG:  00000: duration: 54.678 ms
+2024-11-22 09:05:41.348 GMT [59] postgres postgres psql [local] LOCATION:  exec_simple_query, postgres.c:1368
+2024-11-22 09:05:41.927 GMT [61] postgres postgres psql [local] LOG:  00000: statement: CREATE DATABASE "users_db" ;
+2024-11-22 09:05:41.927 GMT [61] postgres postgres psql [local] LOCATION:  exec_simple_query, postgres.c:1075
+2024-11-22 09:06:49.412 GMT [61] postgres postgres psql [local] LOG:  00000: AUDIT: SESSION,1,1,DDL,CREATE DATABASE,,,"CREATE DATABASE ""users_db""",<not logged>
+2024-11-22 09:06:49.412 GMT [61] postgres postgres psql [local] LOCATION:  log_audit_event, pgaudit.c:875
+2024-11-22 09:06:50.509 GMT [61] postgres postgres psql [local] LOG:  00000: duration: 68582.515 ms
+2024-11-22 09:06:50.509 GMT [61] postgres postgres psql [local] LOCATION:  exec_simple_query, postgres.c:1368
+2024-11-22 09:06:50.521 GMT [49]     LOG:  00000: received fast shutdown request
+2024-11-22 09:06:50.521 GMT [49]     LOCATION:  process_pm_shutdown_request, postmaster.c:2273
+2024-11-22 09:06:51.094 GMT [49]     LOG:  00000: aborting any active transactions
+2024-11-22 09:06:51.094 GMT [49]     LOCATION:  process_pm_shutdown_request, postmaster.c:2291
+2024-11-22 09:06:51.098 GMT [49]     LOG:  00000: background worker "logical replication launcher" (PID 56) exited with exit code 1
+2024-11-22 09:06:51.098 GMT [49]     LOCATION:  LogChildExit, postmaster.c:3076
+2024-11-22 09:06:51.098 GMT [51]     LOG:  00000: shutting down
+2024-11-22 09:06:51.098 GMT [51]     LOCATION:  ShutdownXLOG, xlog.c:6611
+2024-11-22 09:06:51.552 GMT [51]     LOG:  00000: checkpoint starting: shutdown immediate
+2024-11-22 09:06:51.552 GMT [51]     LOCATION:  LogCheckpointStart, xlog.c:6661

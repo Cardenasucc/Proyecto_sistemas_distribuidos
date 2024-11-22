@@ -9,20 +9,15 @@ RUN npm install -g npm@8.12.1
 RUN mkdir -p /usr/usersAPI 
 
 WORKDIR /usr/usersAPI
+
 COPY users/package*.json ./
-RUN npm install prisma
-RUN npm install @prisma/client
-RUN npm install pg 
-RUN npm install graphql apollo-server-express
-RUN npm install cors
-RUN npm install crypto-js
-RUN npm install cryptojs
-RUN npm install express
-RUN npm install jsonwebtoken
-RUN npm install nodemon
-RUN npm install dotenv
+
+RUN npm install
+
 COPY users/ ./
 
 RUN npx prisma generate
+
+EXPOSE 3100
 
 CMD ["npx", "nodemon", "app.js"]
